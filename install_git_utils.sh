@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Nombre del repositorio y carpeta destino
-REPO_URL="https://github.com/yourusername/git-utils.git"
+REPO_URL="https://github.com/ismaelucky342/git-utils.git"
 FOLDER_NAME="git-utils"
 
 # Descargar el repositorio
