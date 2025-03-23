@@ -15,7 +15,9 @@ fi
 
 # Asignar permisos de ejecución a todos los scripts
 echo "🔧 Asignando permisos de ejecución a los scripts..."
+cd "$FOLDER_NAME" || exit 1  # Asegura que estamos en la carpeta correcta
 chmod +x Git_*/*.sh
+cd ..
 
 # Añadir los alias a ~/.bashrc o ~/.zshrc
 SHELL_CONFIG="$HOME/.bashrc"
