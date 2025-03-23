@@ -1,43 +1,45 @@
 #!/bin/bash
 
-# Nombre del repositorio y carpeta destino
+# Repository name and destination folder
 REPO_URL="https://github.com/ismaelucky342/git_env_tools.git"
 FOLDER_NAME="git_env_tools"
 
-# Descargar el repositorio
+# Download the repository
 if [ ! -d "$FOLDER_NAME" ]; then
-    echo "🚀 Clonando el repositorio..."
+    echo "🚀 Cloning the repository..."
     git clone "$REPO_URL"
 else
-    echo "⚡ El repositorio ya existe. Actualizando..."
+    echo "⚡ Repository already exists. Updating..."
     cd "$FOLDER_NAME" && git pull && cd ..
 fi
 
-# Asignar permisos de ejecución a todos los scripts
-echo "🔧 Asignando permisos de ejecución a los scripts..."
-cd "$FOLDER_NAME" || exit 1  # Asegura que estamos en la carpeta correcta
+# Make all scripts executable
+echo "🔧 Setting execution permissions for scripts..."
+cd "$FOLDER_NAME" || exit 1  # Ensure we are in the correct folder
 chmod +x Git_*/*.sh
 cd ..
 
-# Añadir los alias a ~/.bashrc o ~/.zshrc
+# Add aliases to ~/.bashrc or ~/.zshrc
 SHELL_CONFIG="$HOME/.bashrc"
 if [ -n "$ZSH_VERSION" ]; then
     SHELL_CONFIG="$HOME/.zshrc"
 fi
 
-echo "🔗 Añadiendo alias a $SHELL_CONFIG..."
+echo "🔗 Adding aliases to $SHELL_CONFIG..."
 
-# Alias para cada script
+# Aliases for each script
 echo "
 # Git utils aliases
-alias gitfix='bash $HOME/$FOLDER_NAME/Git_fix_all/pull_merge_rebase_fix.sh'
-alias pullall='bash $HOME/$FOLDER_NAME/Git_pull_all/pull_all.sh'
-alias pushall='bash $HOME/$FOLDER_NAME/Git_push_all/push_all.sh'
-alias gittree='bash $HOME/$FOLDER_NAME/Git_tree/git_tree.sh'
+alias git-fix='bash $HOME/$FOLDER_NAME/Git_fix_all/pull_merge_rebase_fix.sh'
+alias git-pull-all='bash $HOME/$FOLDER_NAME/Git_pull_all/pull_all.sh'
+alias git-push-all='bash $HOME/$FOLDER_NAME/Git_push_all/push_all.sh'
+alias git-tree='bash $HOME/$FOLDER_NAME/Git_tree/git_tree.sh'
+alias git-info='bash $HOME/$FOLDER_NAME/Git_info/git_info.sh'
 " >> "$SHELL_CONFIG"
 
-# Aplicar los cambios de configuración
-echo "🔄 Aplicando cambios a la configuración del shell..."
+# Apply shell configuration changes
+echo "🔄 Applying shell configuration changes..."
 source "$SHELL_CONFIG"
 
-echo "✅ ¡Todo listo! Los alias han sido añadidos y los scripts son ejecutables."
+echo "✅ All set! Aliases have been added, and scripts are executable."
+echo "🚀 Happy coding! 🚀"
