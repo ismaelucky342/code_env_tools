@@ -39,7 +39,7 @@ alias git-info='bash $HOME/$FOLDER_NAME/Git_info/git_info.sh'
 
 # Apply the configuration changes
 echo "🔄 Applying changes to the shell configuration..."
-source "$SHELL_CONFIG"  # Don't forget this to apply the aliases immediately
+source "$SHELL_CONFIG"  # Apply the aliases immediately
 
 echo "✅ All set! The aliases have been added and the scripts are executable."
 echo "🚀 Happy coding! 🚀"
