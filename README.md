@@ -16,7 +16,8 @@ To install the Git environment tools and set up the necessary aliases, run the f
 
 ```bash
 
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/ismaelucky342/git_env_tools/main/install_git_utils.sh)" && chmod +x install_git_utils.sh && ./install_git_utils.sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/ismaelucky342/git_env_tools/main/install_git_utils.sh)"
+
 
 ```
 
