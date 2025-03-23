@@ -2,7 +2,7 @@
 
 # Nombre del repositorio y carpeta destino
 REPO_URL="https://github.com/ismaelucky342/git_env_tools.git"
-FOLDER_NAME="git-utils"
+FOLDER_NAME="git_env_tools"
 
 # Descargar el repositorio
 if [ ! -d "$FOLDER_NAME" ]; then
@@ -15,7 +15,7 @@ fi
 
 # Asignar permisos de ejecución a todos los scripts
 echo "🔧 Asignando permisos de ejecución a los scripts..."
-chmod +x "$FOLDER_NAME"/*/*.sh
+chmod +x Git_*/*.sh
 
 # Añadir los alias a ~/.bashrc o ~/.zshrc
 SHELL_CONFIG="$HOME/.bashrc"
