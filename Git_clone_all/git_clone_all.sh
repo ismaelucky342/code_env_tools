@@ -16,7 +16,7 @@ cd "$DEST_FOLDER" || exit 1
 
 # Get the list of public repositories of the user using the GitHub API
 echo "🚀 Fetching the list of GitHub repositories for user $USER_GITHUB..."
-REPOS=$(curl -s "https://api.github.com/users/$USER_GITHUB/repos?per_page=100" | jq -r '.[].clone_url')
+REPOS=$(curl -s "https://api.github.com/users/$USER_GITHUB/repos?per_page=100" | grep -o 'https://github.com/[^"]*\.git')
 
 # Check if a list of repositories was obtained
 if [ -z "$REPOS" ]; then
