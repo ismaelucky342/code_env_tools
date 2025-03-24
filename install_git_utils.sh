@@ -47,5 +47,14 @@ EOF
 echo "🔄 Applying changes to the shell configuration..."
 source "$SHELL_CONFIG"
 
+# Verify that the aliases are available in the session
+echo "🔍 Verifying alias availability..."
+if alias git-uninstall &>/dev/null; then
+    echo "✅ Alias 'git-uninstall' has been successfully added!"
+else
+    echo "❌ ERROR: Alias 'git-uninstall' is not available in the session."
+    echo "⚠️ Try running: source $SHELL_CONFIG and then test again."
+fi
+
 echo "✅ All set! The aliases have been added and the scripts are executable."
 echo "🚀 Happy coding! 🚀"

@@ -9,7 +9,7 @@ fi
 
 echo "🔧 Eliminando los alias de $SHELL_CONFIG..."
 
-sed -i '/# Git utils aliases/,+5d' "$SHELL_CONFIG"
+sed -i '/# Git utils aliases/,+6d' "$SHELL_CONFIG"
 
 echo "🔄 Aplicando cambios a la configuración del shell..."
 source "$SHELL_CONFIG"
