@@ -28,7 +28,7 @@ cd ..
 
 # Remove old aliases from the shell configuration
 echo "🧹 Cleaning up old aliases from $SHELL_CONFIG..."
-sed -i '/# Git utils aliases/,+7d' "$SHELL_CONFIG"
+sed -i '/# Git utils aliases/,+5d' "$SHELL_CONFIG"
 
 # Add new aliases
 echo "🔗 Adding aliases to $SHELL_CONFIG..."
@@ -40,12 +40,15 @@ alias git-pull-all='bash $HOME/$FOLDER_NAME/Git_pull_all/pull_all.sh'
 alias git-push-all='bash $HOME/$FOLDER_NAME/Git_push_all/push_all.sh'
 alias git-tree='bash $HOME/$FOLDER_NAME/Git_tree/git_tree.sh'
 alias git-info='bash $HOME/$FOLDER_NAME/Git_info/git_info.sh'
-alias git-purge='bash $HOME/$FOLDER_NAME/git_purge.sh'
 EOF
 
-
 # Ensure the purge script is executable
+echo "🔧 Granting execution permissions to git_purge.sh..."
 chmod +x "$FOLDER_NAME/git_purge.sh"
+
+# Add git-purge alias separately
+echo "🔗 Adding git-purge alias to $SHELL_CONFIG..."
+echo "alias git-purge='bash $HOME/$FOLDER_NAME/git_purge.sh'" >> "$SHELL_CONFIG"
 
 # Apply changes immediately
 echo "🔄 Applying changes to the shell configuration..."
@@ -53,10 +56,10 @@ source "$SHELL_CONFIG"
 
 # Verify alias availability
 echo "🔍 Verifying alias availability..."
-if alias git-uninstall &>/dev/null && alias git-purge &>/dev/null; then
-    echo "✅ Aliases 'git-uninstall' and 'git-purge' have been successfully added!"
+if alias git-purge &>/dev/null; then
+    echo "✅ Alias 'git-purge' has been successfully added!"
 else
-    echo "❌ ERROR: Some aliases are not available."
+    echo "❌ ERROR: Alias 'git-purge' is not available."
     echo "⚠️ Try running: source $SHELL_CONFIG and then test again."
 fi
 
