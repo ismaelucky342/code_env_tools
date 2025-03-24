@@ -9,7 +9,7 @@
 - **Git Push All**: Push your changes to all remote branches.
 - **Git Tree**: Visualize your Git repository’s commit history in an ASCII-style tree.
 - **Git Info**: Shows available Git utils aliases and their descriptions.
-- **Git Utils Uninstall**: Uninstalls all Git utils and removes associated aliases.
+- **Git Purge**: Uninstalls all Git utils and removes associated aliases.
 
 ## Installation
 
