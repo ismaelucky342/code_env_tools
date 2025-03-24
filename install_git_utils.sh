@@ -66,7 +66,6 @@ if [[ "$SHELL" == */zsh ]]; then
 else
     source "$HOME/.bashrc" || { echo "⚠️ Failed to source $HOME/.bashrc"; source "$HOME/.bashrc"; }
 fi
-fi
 
 echo "✅ All set! The aliases have been added and the scripts are executable."
 echo "🚀 Happy coding! 🚀"
