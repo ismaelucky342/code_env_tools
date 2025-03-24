@@ -62,10 +62,11 @@ echo "alias git-purge='bash $PURGE_SCRIPT'" >> "$SHELL_CONFIG"
 
 # Apply changes immediately
 echo "🔄 Applying changes to the shell configuration..."
-if [[ "$SHELL" == */zsh ]]; then
-    source "$HOME/.zshrc" || { echo "⚠️ Failed to source $HOME/.zshrc"; source "$HOME/.zshrc"; }
+CONFIG_FILE=$(find "$HOME" -maxdepth 1 -name ".zshrc" -o -name ".bashrc" | head -n 1)
+if [ -n "$CONFIG_FILE" ]; then
+    source "$CONFIG_FILE" || { echo "⚠️ Failed to source $CONFIG_FILE"; source "$CONFIG_FILE"; }
 else
-    source "$HOME/.bashrc" || { echo "⚠️ Failed to source $HOME/.bashrc"; source "$HOME/.bashrc"; }
+    echo "⚠️ No shell configuration file found."
 fi
 
 echo "✅ All set! The aliases have been added and the scripts are executable."
