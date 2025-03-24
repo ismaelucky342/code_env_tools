@@ -64,16 +64,22 @@ chmod +x "$PURGE_SCRIPT"
 echo "🔗 Adding git-purge alias to $SHELL_CONFIG..."
 echo "alias git-purge='bash $PURGE_SCRIPT'" >> "$SHELL_CONFIG"
 
-# Apply changes immediately
-echo "🔄 Applying changes to the shell configuration..."
-if [ -f "/.bashrc" ]; then
-    source "/.bashrc"
-elif [ -f "/.zshrc" ]; then
-    source "/.zshrc"
+SHELL_CONFIG=""
+for file in "$HOME/.zshrc" "$HOME/.bashrc" "$HOME/.profile" "$HOME/.bash_profile" "$HOME/.config/fish/config.fish"; do
+    if [[ -f "$file" ]]; then
+        SHELL_CONFIG="$file"
+        break
+    fi
+done
+
+if [[ -n "$SHELL_CONFIG" ]]; then
+    echo "🔄 Applying changes to the shell configuration ($SHELL_CONFIG)..."
+    source "$SHELL_CONFIG"
 else
-    echo "❌ ERROR: No compatible shell configuration file found!"
-    exit 1
+    echo "⚠️ No shell configuration file found."
 fi
+
+
 
 
 echo "✅ All set! The aliases have been added and the scripts are executable."
