@@ -43,7 +43,7 @@ alias git-info='bash $HOME/$FOLDER_NAME/Git_info/git_info.sh'
 EOF
 
 # Find the git_purge.sh script dynamically
-PURGE_SCRIPT=$(find "$HOME/$FOLDER_NAME" -type f -name "git_purge.sh" | head -n 1)
+PURGE_SCRIPT=$(find "$HOME/$FOLDER_NAME/" -type f -name "git_purge.sh" | head -n 1)
 
 # Check if the script exists before proceeding
 if [ -z "$PURGE_SCRIPT" ]; then
