@@ -11,6 +11,7 @@
 - **Git Info**: Shows available Git utils aliases and their descriptions.
 - **Git Purge**: Uninstalls all Git utils and removes associated aliases.
 - **Git Clone All**: Clones all public repositories from a specified GitHub user.
+- **Git Delete All**: Deletes all cloned git repositories in all folders and subfolders.
 
 ## Installation
 
@@ -40,7 +41,7 @@ If you prefer to install manually, follow these steps:
 2. Make the scripts executable:
     
     ```bash
-    chmod +x Git_fix_all/*.sh Git_pull_all/*.sh Git_push_all/*.sh Git_tree/*.sh Git_info/*.sh Git_clone_all/*.sh
+    chmod +x Git_fix_all/*.sh Git_pull_all/*.sh Git_push_all/*.sh Git_tree/*.sh Git_info/*.sh Git_clone_all/*.sh Git_delete_repos/*.sh
     ```
     
 3. Add the following aliases to your `~/.bashrc` or `~/.zshrc` file:
@@ -53,6 +54,7 @@ If you prefer to install manually, follow these steps:
     alias git-info='bash ~/path_to_git_env_tools/Git_info/git-info.sh'
     alias git-purge='bash ~/path_to_git_env_tools/git-utils-uninstall.sh'
     alias git-clone-all='bash ~/path_to_git_env_tools/Git_clone_all/git_clone_all.sh'
+    alias git-delete-all='bash ~/path_to_git_env_tools/Git_delete_repos/git_delete_repos.sh'
     ```
     
     Replace `~/path_to_git_env_tools/` with the actual path to your cloned repository.
@@ -75,6 +77,7 @@ Once the installation is complete, you can start using the following commands:
 - **Git Info**: Run `git-info` to display available Git utils aliases and their descriptions.
 - **Git Purge**: Run `git-purge` to uninstall all Git utils and remove the aliases from your shell configuration.
 - **Git Clone All**: Run `git-clone-all <user>` to clone all public repositories from a specified GitHub user.
+- **Git Delete All**: Run `git-delete-all` to delete all cloned git repositories in all folders and subfolders.
 
 ### Example Usage
 
@@ -86,4 +89,5 @@ git-tree         # Displays the commit history in a tree format
 git-info         # Shows available Git utils aliases and descriptions
 git-purge        # Uninstalls all Git utils and removes aliases
 git-clone-all <user> # Clones all public repositories from a specified GitHub user
+git-delete-all # Deletes all cloned git repositories in all folders and subfolders
 ```
