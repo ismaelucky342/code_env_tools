@@ -10,6 +10,7 @@
 - **Git Tree**: Visualize your Git repository’s commit history in an ASCII-style tree.
 - **Git Info**: Shows available Git utils aliases and their descriptions.
 - **Git Purge**: Uninstalls all Git utils and removes associated aliases.
+- **Git Clone All**: Clones all public repositories from a specified GitHub user.
 
 ## Installation
 
@@ -39,7 +40,7 @@ If you prefer to install manually, follow these steps:
 2. Make the scripts executable:
     
     ```bash
-    chmod +x Git_fix_all/*.sh Git_pull_all/*.sh Git_push_all/*.sh Git_tree/*.sh Git_info/*.sh
+    chmod +x Git_fix_all/*.sh Git_pull_all/*.sh Git_push_all/*.sh Git_tree/*.sh Git_info/*.sh Git_clone_all/*.sh
     ```
     
 3. Add the following aliases to your `~/.bashrc` or `~/.zshrc` file:
@@ -51,6 +52,7 @@ If you prefer to install manually, follow these steps:
     alias git-tree='bash ~/path_to_git_env_tools/Git_tree/git_tree.sh'
     alias git-info='bash ~/path_to_git_env_tools/Git_info/git-info.sh'
     alias git-purge='bash ~/path_to_git_env_tools/git-utils-uninstall.sh'
+    alias git-clone-all='bash ~/path_to_git_env_tools/Git_clone_all/git_clone_all.sh'
     ```
     
     Replace `~/path_to_git_env_tools/` with the actual path to your cloned repository.
@@ -71,7 +73,8 @@ Once the installation is complete, you can start using the following commands:
 - **Git Push All**: Run `git-push-all` to push your changes to all remote branches.
 - **Git Tree**: Run `git-tree` to display your repository’s commit history in a visual ASCII tree format.
 - **Git Info**: Run `git-info` to display available Git utils aliases and their descriptions.
-- **Git Utils Uninstall**: Run `git-purge` to uninstall all Git utils and remove the aliases from your shell configuration.
+- **Git Purge**: Run `git-purge` to uninstall all Git utils and remove the aliases from your shell configuration.
+- **Git Clone All**: Run `git-clone-all <user>` to clone all public repositories from a specified GitHub user.
 
 ### Example Usage
 
@@ -81,5 +84,6 @@ git-pull-all     # Pulls the latest changes from all branches
 git-push-all     # Pushes your changes to all remote branches
 git-tree         # Displays the commit history in a tree format
 git-info         # Shows available Git utils aliases and descriptions
-git-purge # Uninstalls all Git utils and removes aliases
+git-purge        # Uninstalls all Git utils and removes aliases
+git-clone-all <user> # Clones all public repositories from a specified GitHub user
 ```
