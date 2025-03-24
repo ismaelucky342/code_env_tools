@@ -35,12 +35,12 @@ echo "🔗 Adding aliases to $SHELL_CONFIG..."
 cat <<EOF >> "$SHELL_CONFIG"
 
 # Git utils aliases
+alias git-uninstall='bash $HOME/$FOLDER_NAME/Git_utils_uninstall/git_utils_uninstall.sh'
 alias git-fix='bash $HOME/$FOLDER_NAME/Git_fix_all/pull_merge_rebase_fix.sh'
 alias git-pull-all='bash $HOME/$FOLDER_NAME/Git_pull_all/pull_all.sh'
 alias git-push-all='bash $HOME/$FOLDER_NAME/Git_push_all/push_all.sh'
 alias git-tree='bash $HOME/$FOLDER_NAME/Git_tree/git_tree.sh'
 alias git-info='bash $HOME/$FOLDER_NAME/Git_info/git_info.sh'
-alias git-uninstall='bash $HOME/$FOLDER_NAME/Git_utils_uninstall/git_utils_uninstall.sh'
 EOF
 
 # Apply changes immediately
