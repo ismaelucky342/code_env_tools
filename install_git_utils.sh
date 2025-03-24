@@ -42,7 +42,6 @@ alias git-push-all='bash $HOME/$FOLDER_NAME/Git_push_all/push_all.sh'
 alias git-delete-all='bash $HOME/$FOLDER_NAME/Git_delete_repos/git_delete_repos.sh'
 alias git-tree='bash $HOME/$FOLDER_NAME/Git_tree/git_tree.sh'
 alias git-info='bash $HOME/$FOLDER_NAME/Git_info/git_info.sh'
-alias set-nvim='bash $HOME/$FOLDER_NAME/Nvim_creator/nvim_set.sh'
 EOF
 
 
@@ -64,22 +63,16 @@ chmod +x "$PURGE_SCRIPT"
 echo "🔗 Adding git-purge alias to $SHELL_CONFIG..."
 echo "alias git-purge='bash $PURGE_SCRIPT'" >> "$SHELL_CONFIG"
 
-SHELL_CONFIG=""
-for file in "$HOME/.zshrc" "$HOME/.bashrc" "$HOME/.profile" "$HOME/.bash_profile" "$HOME/.config/fish/config.fish"; do
-    if [[ -f "$file" ]]; then
-        SHELL_CONFIG="$file"
-        break
-    fi
-done
-
-if [[ -n "$SHELL_CONFIG" ]]; then
-    echo "🔄 Applying changes to the shell configuration ($SHELL_CONFIG)..."
-    source "$SHELL_CONFIG"
+# Apply changes immediately
+echo "🔄 Applying changes to the shell configuration..."
+if [ -f "$HOME/.bashrc" ]; then
+    source "$HOME/.bashrc"
+elif [ -f "$HOME/.zshrc" ]; then
+    source "$HOME/.zshrc"
 else
-    echo "⚠️ No shell configuration file found."
+    echo "❌ ERROR: No compatible shell configuration file found!"
+    exit 1
 fi
-
-
 
 
 echo "✅ All set! The aliases have been added and the scripts are executable."
