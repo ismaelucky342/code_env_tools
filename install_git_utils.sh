@@ -42,17 +42,30 @@ alias git-tree='bash $HOME/$FOLDER_NAME/Git_tree/git_tree.sh'
 alias git-info='bash $HOME/$FOLDER_NAME/Git_info/git_info.sh'
 EOF
 
-# Ensure the purge script is executable
-echo "🔧 Granting execution permissions to git_purge.sh..."
-chmod +x "$FOLDER_NAME/git_purge.sh"
+# Find the git_purge.sh script dynamically
+PURGE_SCRIPT=$(find "$HOME/$FOLDER_NAME" -type f -name "git_purge.sh" | head -n 1)
 
-# Add git-purge alias separately
+# Check if the script exists before proceeding
+if [ -z "$PURGE_SCRIPT" ]; then
+    echo "❌ ERROR: git_purge.sh script not found!"
+    exit 1
+fi
+
+# Ensure the purge script is executable
+echo "🔧 Granting execution permissions to $PURGE_SCRIPT..."
+chmod +x "$PURGE_SCRIPT"
+
+# Add git-purge alias
 echo "🔗 Adding git-purge alias to $SHELL_CONFIG..."
-echo "alias git-purge='bash $HOME/$FOLDER_NAME/git_purge.sh'" >> "$SHELL_CONFIG"
+echo "alias git-purge='bash $PURGE_SCRIPT'" >> "$SHELL_CONFIG"
 
 # Apply changes immediately
 echo "🔄 Applying changes to the shell configuration..."
-source "$SHELL_CONFIG"
+if [[ "$SHELL" == */zsh ]]; then
+    source "$HOME/.zshrc"
+else
+    source "$HOME/.bashrc"
+fi
 
 # Verify alias availability
 echo "🔍 Verifying alias availability..."
