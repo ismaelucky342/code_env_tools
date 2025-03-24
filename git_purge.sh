@@ -12,6 +12,7 @@ fi
 # Remove git- aliases
 echo "🧹 Removing git- aliases from $SHELL_CONFIG..."
 sed -i '/^alias git-/d' "$SHELL_CONFIG"
+sed -i '/^alias set-/d' "$SHELL_CONFIG"
 
 # Remove execution permissions
 echo "🔧 Removing execution permissions from scripts..."
