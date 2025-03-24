@@ -50,7 +50,7 @@ If you prefer to install manually, follow these steps:
     alias git-push-all='bash ~/path_to_git_env_tools/Git_push_all/push_all.sh'
     alias git-tree='bash ~/path_to_git_env_tools/Git_tree/git_tree.sh'
     alias git-info='bash ~/path_to_git_env_tools/Git_info/git-info.sh'
-    alias git-utils-uninstall='bash ~/path_to_git_env_tools/git-utils-uninstall.sh'
+    alias git-purge='bash ~/path_to_git_env_tools/git-utils-uninstall.sh'
     ```
     
     Replace `~/path_to_git_env_tools/` with the actual path to your cloned repository.
@@ -71,7 +71,7 @@ Once the installation is complete, you can start using the following commands:
 - **Git Push All**: Run `git-push-all` to push your changes to all remote branches.
 - **Git Tree**: Run `git-tree` to display your repository’s commit history in a visual ASCII tree format.
 - **Git Info**: Run `git-info` to display available Git utils aliases and their descriptions.
-- **Git Utils Uninstall**: Run `git-utils-uninstall` to uninstall all Git utils and remove the aliases from your shell configuration.
+- **Git Utils Uninstall**: Run `git-purge` to uninstall all Git utils and remove the aliases from your shell configuration.
 
 ### Example Usage
 
@@ -81,5 +81,5 @@ git-pull-all     # Pulls the latest changes from all branches
 git-push-all     # Pushes your changes to all remote branches
 git-tree         # Displays the commit history in a tree format
 git-info         # Shows available Git utils aliases and descriptions
-git-utils-uninstall # Uninstalls all Git utils and removes aliases
+git-purge # Uninstalls all Git utils and removes aliases
 ```
