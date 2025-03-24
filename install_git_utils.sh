@@ -65,8 +65,14 @@ echo "alias git-purge='bash $PURGE_SCRIPT'" >> "$SHELL_CONFIG"
 
 # Apply changes immediately
 echo "🔄 Applying changes to the shell configuration..."
-cd ~ && source ~/.bashrc
-cd ~ && source ~/.zshrc
+if [ -f "$HOME/.bashrc" ]; then
+    source "$HOME/.bashrc"
+elif [ -f "$HOME/.zshrc" ]; then
+    source "$HOME/.zshrc"
+else
+    echo "❌ ERROR: No compatible shell configuration file found!"
+    exit 1
+fi
 
 
 echo "✅ All set! The aliases have been added and the scripts are executable."
