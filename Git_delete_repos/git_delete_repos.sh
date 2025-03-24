@@ -6,6 +6,10 @@
 delete_git_repos() {
     for dir in "$1"/*; do
         if [ -d "$dir" ]; then
+            if [[ "$dir" == *"git_env_tools"* ]]; then
+                echo "🚫 Ignoring directory $dir"
+                continue
+            fi
             if [ -d "$dir/.git" ]; then
                 echo "🗑️ Deleting git repository in $dir"
                 rm -rf "$dir"
