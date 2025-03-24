@@ -19,6 +19,12 @@ echo -e "${CYAN}🔄 Updating and pushing all repositories...${RESET}"
 find "$start_dir" -type d -name ".git" | while read gitdir; do
   repo_dir=$(dirname "$gitdir")  # Get the parent directory (actual repo)
 
+  # Skip the git_env_tools directory
+  if [[ "$repo_dir" == *"git_env_tools"* ]]; then
+    echo -e "${YELLOW}⚠️ Skipping repository: ${repo_dir}${RESET}"
+    continue
+  fi
+
   echo -e "${YELLOW}📂 Processing repository: ${repo_dir}${RESET}"
 
   cd "$repo_dir" || exit  # Change into the repository directory
