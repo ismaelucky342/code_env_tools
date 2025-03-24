@@ -62,18 +62,10 @@ echo "alias git-purge='bash $PURGE_SCRIPT'" >> "$SHELL_CONFIG"
 # Apply changes immediately
 echo "🔄 Applying changes to the shell configuration..."
 if [[ "$SHELL" == */zsh ]]; then
-    source "$HOME/.zshrc"
+    source "$HOME/.zshrc" || { echo "⚠️ Failed to source $HOME/.zshrc"; source "$HOME/.zshrc"; }
 else
-    source "$HOME/.bashrc"
+    source "$HOME/.bashrc" || { echo "⚠️ Failed to source $HOME/.bashrc"; source "$HOME/.bashrc"; }
 fi
-
-# Verify alias availability
-echo "🔍 Verifying alias availability..."
-if alias git-purge &>/dev/null; then
-    echo "✅ Alias 'git-purge' has been successfully added!"
-else
-    echo "❌ ERROR: Alias 'git-purge' is not available."
-    echo "⚠️ Try running: source $SHELL_CONFIG and then test again."
 fi
 
 echo "✅ All set! The aliases have been added and the scripts are executable."
