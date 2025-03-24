@@ -43,6 +43,8 @@ alias git-tree='bash $HOME/$FOLDER_NAME/Git_tree/git_tree.sh'
 alias git-info='bash $HOME/$FOLDER_NAME/Git_info/git_info.sh'
 EOF
 
+
+
 # Find the git_purge.sh script dynamically
 PURGE_SCRIPT=$(find "$HOME/$FOLDER_NAME/" -type f -name "git_purge.sh" | head -n 1)
 
@@ -62,12 +64,9 @@ echo "alias git-purge='bash $PURGE_SCRIPT'" >> "$SHELL_CONFIG"
 
 # Apply changes immediately
 echo "🔄 Applying changes to the shell configuration..."
-CONFIG_FILE=$(find "$HOME" -maxdepth 1 -name ".zshrc" -o -name ".bashrc" | head -n 1)
-if [ -n "$CONFIG_FILE" ]; then
-    source "$CONFIG_FILE" || { echo "⚠️ Failed to source $CONFIG_FILE"; source "$CONFIG_FILE"; }
-else
-    echo "⚠️ No shell configuration file found."
-fi
+cd ~ && source ~/.bashrc
+cd ~ && source ~/.zshrc
+
 
 echo "✅ All set! The aliases have been added and the scripts are executable."
 echo "          "
