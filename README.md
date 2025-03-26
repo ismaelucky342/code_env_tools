@@ -1,6 +1,6 @@
-# Git Environment Tools
+# Code Environment Tools
 
-**Git Environment Tools** is a collection of Bash scripts and utilities designed to simplify and enhance your Git workflow. This repository contains scripts for common Git tasks like pulling, pushing, managing branches, and displaying commit trees. It also includes helpful tools for configuring and managing your Git environment with ease.
+This repository is a collection of Bash scripts and utilities designed to simplify and enhance your Git workflow. This repository contains scripts for common Git tasks like pulling, pushing, managing branches, and displaying commit trees. It also includes helpful tools for configuring and managing your Git environment with ease.
 
 ## Features
 
