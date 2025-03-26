@@ -90,4 +90,4 @@ echo " ╚═════╝ ╚═╝   ╚═╝╚══════╝╚═
 echo "                created by Ismaelucky342 - 2025/03/21 - ismherna@student.42madrid.com - 42 Madrid"                                                                             
 echo "          "
 echo "🚀 Happy coding! 🚀"
-echo "if you have troubles with the commands run source ~/.bashrc or source ~/.zshrc"      "
+echo "⚠️ If you have troubles with the commands, run source ~/.bashrc or source ~/.zshrc"
