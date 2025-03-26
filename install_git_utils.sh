@@ -42,10 +42,10 @@ alias git-push-all='bash $HOME/$FOLDER_NAME/Git_push_all/push_all.sh'
 alias git-delete-all='bash $HOME/$FOLDER_NAME/Git_delete_repos/git_delete_repos.sh'
 alias git-tree='bash $HOME/$FOLDER_NAME/Git_tree/git_tree.sh'
 alias git-info='bash $HOME/$FOLDER_NAME/Git_info/git_info.sh'
-alias set-nvim-raw='bash $HOME/$FOLDER_NAME/set_nvim_raw/set_nvim_raw.sh'
-alias set-nvim-plugins='bash $HOME/$FOLDER_NAME/set_nvim_plugins/set_nvim_plugins.sh'
-alias set-nvim-all='bash $HOME/$FOLDER_NAME/set_nvim_all/set_nvim_raw.sh && bash $HOME/$FOLDER_NAME/set_nvim_all/set_nvim_plugins.sh'
-alias set-code-env='bash $HOME/$FOLDER_NAME/set_nvim_all/set_nvim_raw.sh && bash $HOME/$FOLDER_NAME/set_nvim_all/set_nvim_plugins.sh && bash $HOME/$FOLDER_NAME/Git_pull_all/pull_all.sh'
+alias set-nvim-raw='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh'
+alias set-nvim-plugins='bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
+alias set-nvim-all='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh && bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
+alias set-code-env='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh && bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh && bash $HOME/$FOLDER_NAME/Git_pull_all/pull_all.sh'
 EOF
 
 
