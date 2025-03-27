@@ -45,7 +45,7 @@ alias git-info='bash $HOME/$FOLDER_NAME/Git_info/git_info.sh'
 alias set-nvim-raw='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh'
 alias set-nvim-plugins='bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
 alias set-nvim-all='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh && bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
-alias set-code-env='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh ; bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh
+alias set-code-env='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh && bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh
 EOF
 
 
