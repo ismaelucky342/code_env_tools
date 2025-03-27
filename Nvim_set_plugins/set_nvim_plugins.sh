@@ -40,6 +40,44 @@ return {
 EOF
 fi
 
+# Install ImageMagick locally (no sudo)
+MAGICK_DIR="$HOME/.local/ImageMagick"
+if [ ! -d "$MAGICK_DIR" ]; then
+    echo "📷 Installing ImageMagick locally..."
+    mkdir -p "$MAGICK_DIR"
+    curl -L https://imagemagick.org/archive/releases/ImageMagick-7.1.1-24.tar.gz | tar -xz -C "$MAGICK_DIR" --strip-components=1
+    cd "$MAGICK_DIR" || exit
+    ./configure --prefix="$MAGICK_DIR" --with-modules
+    make -j$(nproc) && make install
+    cd - || exit
+    echo "export PATH=\"$MAGICK_DIR/bin:\$PATH\"" >> ~/.bashrc
+    echo "export LD_LIBRARY_PATH=\"$MAGICK_DIR/lib:\$LD_LIBRARY_PATH\"" >> ~/.bashrc
+    export PATH="$MAGICK_DIR/bin:$PATH"
+    export LD_LIBRARY_PATH="$MAGICK_DIR/lib:$LD_LIBRARY_PATH"
+fi
+
+# Install LuaRocks locally (no sudo)
+LUAROCKS_DIR="$HOME/.local/luarocks"
+if [ ! -d "$LUAROCKS_DIR" ]; then
+    echo "🔨 Installing LuaRocks locally..."
+    mkdir -p "$LUAROCKS_DIR"
+    curl -L http://luarocks.github.io/luarocks/releases/luarocks-3.9.1.tar.gz | tar -xz -C "$LUAROCKS_DIR" --strip-components=1
+    cd "$LUAROCKS_DIR" || exit
+    ./configure --prefix="$LUAROCKS_DIR" --with-lua-include=/usr/include/lua5.1
+    make -j$(nproc) && make install
+    cd - || exit
+    echo "export PATH=\"$LUAROCKS_DIR/bin:\$PATH\"" >> ~/.bashrc
+    export PATH="$LUAROCKS_DIR/bin:$PATH"
+fi
+
+# Install lua-magick (without sudo)
+echo "🔮 Installing lua-magick..."
+"$LUAROCKS_DIR/bin/luarocks" install magick --tree="$HOME/.local"
+
+# Install image.nvim dependencies
+echo "🖼 Installing magick.nvim dependencies..."
+"$LUAROCKS_DIR/bin/luarocks" install magick
+
 # Create init.lua configuration file
 echo "📝 Creating configuration in $NVIM_CONFIG/init.lua..."
 cat > "$NVIM_CONFIG/init.lua" << 'EOF'
@@ -105,12 +143,7 @@ require("lazy").setup({
     end }
 })
 
--- Basic plugin configuration
-require("nvim-tree").setup()
-require("lualine").setup({ options = { theme = "tokyonight" } })
-require("telescope").setup()
-
--- Display wallpaper inside Neovim (only for compatible terminals)
+-- Display wallpaper inside Neovim
 vim.api.nvim_create_autocmd("VimEnter", {
     callback = function()
         if vim.fn.executable("kitty") == 1 or os.getenv("TERM_PROGRAM") == "WezTerm" then
