@@ -12,9 +12,10 @@ echo "🚀 Installing Neovim Plugins and Advanced Configuration..."
 # Create directory structure
 mkdir -p "$NVIM_CONFIG" "$NVIM_DATA" "$NVIM_BIN"
 
-if [ ! -d "$HOME/.local/share/nvim/lazy/lazy.nvim" ]; then
+# Install Lazy.nvim if not present
+if [ ! -d "$NVIM_DATA/lazy/lazy.nvim" ]; then
     echo "📥 Downloading Lazy.nvim..."
-    git clone --filter=blob:none https://github.com/folke/lazy.nvim.git --branch=stable "$HOME/.local/share/nvim/lazy/lazy.nvim"
+    git clone --filter=blob:none https://github.com/folke/lazy.nvim.git --branch=stable "$NVIM_DATA/lazy/lazy.nvim"
 fi
 
 # Copy wallpaper to Neovim config directory
@@ -43,7 +44,7 @@ fi
 echo "📝 Creating configuration in $NVIM_CONFIG/init.lua..."
 cat > "$NVIM_CONFIG/init.lua" << 'EOF'
 -- Load Lazy.nvim
-vim.opt.rtp:prepend(vim.fn.stdpath("config") .. "/lazy")
+vim.opt.rtp:prepend(vim.fn.stdpath("data") .. "/lazy/lazy.nvim")
 
 -- Install Plugins
 require("lazy").setup({
@@ -62,15 +63,6 @@ require("lazy").setup({
     { "hrsh7th/nvim-cmp", dependencies = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path" } },
     { "github/copilot.vim" },
 
-    -- 🌍 Language Support
-    { "fatih/vim-go" },  
-    { "pearofducks/ansible-vim" },
-    { "pangloss/vim-javascript" },  
-    { "plasticboy/vim-markdown" },  
-    { "lervag/vimtex" },  
-    { "StanAngeloff/php.vim" },  
-    { "bakpakin/fennel.vim" },  
-    
     -- 🔎 Fuzzy Finder & File Explorer
     { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
     { "nvim-tree/nvim-tree.lua", dependencies = { "nvim-tree/nvim-web-devicons" }, config = function()
@@ -87,21 +79,21 @@ require("lazy").setup({
     { "akinsho/toggleterm.nvim" },
 
     -- 🎨 Enhanced UI
-    { "nvim-lualine/lualine.nvim" },  
-    { "romgrk/barbar.nvim" },  
-    { "lukas-reineke/indent-blankline.nvim" },  
-    { "lewis6991/gitsigns.nvim" },  
-    { "folke/trouble.nvim" },  
+    { "nvim-lualine/lualine.nvim" },
+    { "romgrk/barbar.nvim" },
+    { "lukas-reineke/indent-blankline.nvim" },
+    { "lewis6991/gitsigns.nvim" },
+    { "folke/trouble.nvim" },
 
     -- 📝 Notes and Sessions
     { "nvim-neorg/neorg" },
     { "Shatur/neovim-session-manager" },
 
     -- 💪 Workflow
-    { "windwp/nvim-autopairs" },  
-    { "numToStr/Comment.nvim" },  
-    { "tpope/vim-surround" },  
-    { "tpope/vim-fugitive" },  
+    { "windwp/nvim-autopairs" },
+    { "numToStr/Comment.nvim" },
+    { "tpope/vim-surround" },
+    { "tpope/vim-fugitive" },
     { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" },
 
     -- 🔄 Session Management
