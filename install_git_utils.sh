@@ -35,17 +35,17 @@ echo "🔗 Adding aliases to $SHELL_CONFIG..."
 cat <<EOF >> "$SHELL_CONFIG"
 
 # Git utils aliases
-alias git-fix='bash $HOME/$FOLDER_NAME/Git_fix_all/pull_merge_rebase_fix.sh'
-alias git-pull-all='bash $HOME/$FOLDER_NAME/Git_pull_all/pull_all.sh'
-alias git-clone-all='bash $HOME/$FOLDER_NAME/Git_clone_all/git_clone_all.sh'
-alias git-push-all='bash $HOME/$FOLDER_NAME/Git_push_all/push_all.sh'
-alias git-delete-all='bash $HOME/$FOLDER_NAME/Git_delete_repos/git_delete_repos.sh'
-alias git-tree='bash $HOME/$FOLDER_NAME/Git_tree/git_tree.sh'
-alias git-info='bash $HOME/$FOLDER_NAME/Git_info/git_info.sh'
-alias set-nvim-raw='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh'
-alias set-nvim-plugins='bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
-alias set-nvim-all='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh && bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
-alias set-code-env='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh && bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh
+alias gf='bash $HOME/$FOLDER_NAME/Git_fix_all/pull_merge_rebase_fix.sh'
+alias gpa='bash $HOME/$FOLDER_NAME/Git_pull_all/pull_all.sh'
+alias gca='bash $HOME/$FOLDER_NAME/Git_clone_all/git_clone_all.sh'
+alias gpush='bash $HOME/$FOLDER_NAME/Git_push_all/push_all.sh'
+alias gda='bash $HOME/$FOLDER_NAME/Git_delete_repos/git_delete_repos.sh'
+alias gtree='bash $HOME/$FOLDER_NAME/Git_tree/git_tree.sh'
+alias ginfo='bash $HOME/$FOLDER_NAME/Git_info/git_info.sh'
+alias snvim='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh'
+alias snvimp='bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
+alias snvima='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh && bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
+alias set-code-env='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh && bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
 EOF
 
 
