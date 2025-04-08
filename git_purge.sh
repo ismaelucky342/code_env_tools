@@ -10,12 +10,12 @@ else
 fi
 
 # Remove aliases related to git_env_tools
-echo "🧹 Removing git- aliases from $SHELL_CONFIG..."
-sed -i '/^alias git-/d' "$SHELL_CONFIG"
+echo "🧹 Removing g aliases from $SHELL_CONFIG..."
+sed -i '/^alias g/d' "$SHELL_CONFIG"
 
 # Remove execution permissions from git_env_tools scripts
 echo "🔧 Removing execution permissions from git_env_tools scripts..."
-chmod -x "$HOME/git_env_tools"/Git_*/*.sh 2>/dev/null
+chmod -x "$HOME/git_env_tools"/g*/*.sh 2>/dev/null
 
 # Delete git_env_tools repository folder
 echo "🗑️ Removing git_env_tools repository folder..."
@@ -26,8 +26,8 @@ echo "🗑️ Removing Neovim and its configuration..."
 rm -rf "$HOME/.config/nvim" "$HOME/.local/share/nvim" "$HOME/.local/bin/nvim"
 
 # Remove any Neovim references in shell configuration
-echo "🧹 Cleaning up Neovim-related shell configuration..."
-sed -i '/nvim/d' "$SHELL_CONFIG"
+echo "🧹 Cleaning up s related shell configuration..."
+sed -i '/s/d' "$SHELL_CONFIG"
 
 # Reload shell configuration
 echo "🔄 Reloading shell configuration..."
