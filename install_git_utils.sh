@@ -36,7 +36,7 @@ cat <<EOF >> "$SHELL_CONFIG"
 
 # Git utils aliases
 alias gf='bash $HOME/$FOLDER_NAME/Git_fix_all/pull_merge_rebase_fix.sh'
-alias gpurge='bash $HOME/$FOLDER_NAME/Git_purge_all/git_purge.sh'
+alias gpurge='bash $HOME/$FOLDER_NAME/git_purge.sh'
 alias gpa='bash $HOME/$FOLDER_NAME/Git_pull_all/pull_all.sh'
 alias gca='bash $HOME/$FOLDER_NAME/Git_clone_all/git_clone_all.sh'
 alias gpush='bash $HOME/$FOLDER_NAME/Git_push_all/push_all.sh'
