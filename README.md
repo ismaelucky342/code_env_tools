@@ -11,7 +11,7 @@ This repository is a collection of Bash scripts and utilities designed to simpli
 - **Git Info**: Shows available Git utils aliases and their descriptions.
 - **Git Purge**: Uninstalls all Git utils and removes associated aliases.
 - **Git Clone All**: Clones all public repositories from a specified GitHub user.
-- **Git Delete All**: Deletes all cloned git repositories in all folders and subfolders.
+- **Git Clean All**: Deletes all cloned git repositories in all folders and subfolders.
 - **Set Nvim Raw**: Installs Neovim without plugins.
 - **Set Nvim Plugins**: Installs Neovim plugins and advanced configuration.
 - **Set Nvim All**: Installs Neovim and plugins.
@@ -51,18 +51,18 @@ If you prefer to install manually, follow these steps:
 3. Add the following aliases to your `~/.bashrc` or `~/.zshrc` file:
     
     ```bash
-    alias git-fix-all='bash ~/path_to_git_env_tools/Git_fix_all/pull_merge_rebase_fix.sh'
-    alias git-pull-all='bash ~/path_to_git_env_tools/Git_pull_all/pull_all.sh'
-    alias git-push-all='bash ~/path_to_git_env_tools/Git_push_all/push_all.sh'
-    alias git-tree='bash ~/path_to_git_env_tools/Git_tree/git_tree.sh'
-    alias git-info='bash ~/path_to_git_env_tools/Git_info/git-info.sh'
-    alias git-purge='bash ~/path_to_git_env_tools/git-utils-uninstall.sh'
-    alias git-clone-all='bash ~/path_to_git_env_tools/Git_clone_all/git_clone_all.sh'
-    alias git-delete-all='bash ~/path_to_git_env_tools/Git_delete_repos/git_delete_repos.sh'
-    alias set-nvim-raw='bash ~/path_to_git_env_tools/set_nvim_raw.sh'
-    alias set-nvim-plugins='bash ~/path_to_git_env_tools/set_nvim_plugins.sh'
-    alias set-nvim-all='bash ~/path_to_git_env_tools/set_nvim_all.sh'
-    alias set-code-env='bash ~/path_to_git_env_tools/set_code_enviroment.sh'
+    alias gfix='bash $HOME/$FOLDER_NAME/Git_fix_all/pull_merge_rebase_fix.sh'
+    alias gpurge='bash $HOME/$FOLDER_NAME/git_purge.sh'
+    alias gpull='bash $HOME/$FOLDER_NAME/Git_pull_all/pull_all.sh'
+    alias gclone='bash $HOME/$FOLDER_NAME/Git_clone_all/git_clone_all.sh'
+    alias gpush='bash $HOME/$FOLDER_NAME/Git_push_all/push_all.sh'
+    alias gclean='bash $HOME/$FOLDER_NAME/Git_delete_repos/git_delete_repos.sh'
+    alias gtree='bash $HOME/$FOLDER_NAME/Git_tree/git_tree.sh'
+    alias ginfo='bash $HOME/$FOLDER_NAME/Git_info/git_info.sh'
+    alias snvim='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh'
+    alias snvimp='bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
+    alias snvima='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh && bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
+    alias senv='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh && bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
     ```
     
     Replace `~/path_to_git_env_tools/` with the actual path to your cloned repository.
@@ -78,55 +78,33 @@ If you prefer to install manually, follow these steps:
 
 Once the installation is complete, you can start using the following commands:
 
-- **Git Fix All**: Run `git-fix-all` to automatically fix common issues related to Git merges, pulls, and rebases.
-- **Git Pull All**: Run `git-pull-all` to pull the latest changes from all branches in your Git repository.
-- **Git Push All**: Run `git-push-all` to push your changes to all remote branches.
-- **Git Tree**: Run `git-tree` to display your repository’s commit history in a visual ASCII tree format.
-- **Git Info**: Run `git-info` to display available Git utils aliases and their descriptions.
-- **Git Purge**: Run `git-purge` to uninstall all Git utils and remove the aliases from your shell configuration.
-- **Git Clone All**: Run `git-clone-all <user>` to clone all public repositories from a specified GitHub user.
-- **Git Delete All**: Run `git-delete-all` to delete all cloned git repositories in all folders and subfolders.
-- **Set Nvim Raw**: Run `set-nvim-raw` to install Neovim without plugins.
-- **Set Nvim Plugins**: Run `set-nvim-plugins` to install Neovim plugins and advanced configuration.
-- **Set Nvim All**: Run `set-nvim-all` to install Neovim and plugins.
-- **Set Code Environment**: Run `set-code-env` to install Neovim, plugins, and pull from all repositories.
+- **Git Purge**: Run `gpurge` to delete the git env tools repo, aliases and configs. 
+- **Git Fix All**: Run `gfix` to automatically fix common issues related to Git merges, pulls, and rebases.
+- **Git Pull All**: Run `gpull` to pull the latest changes from all branches in your Git repository.
+- **Git Push All**: Run `gpush` to push your changes to all remote branches.
+- **Git Tree**: Run `gtree` to display your repository’s commit history in a visual ASCII tree format.
+- **Git Info**: Run `ginfo` to display available Git utils aliases and their descriptions.
+- **Git Purge**: Run `gpurge` to uninstall all Git utils and remove the aliases from your shell configuration.
+- **Git Clone All**: Run `gclone <user>` to clone all public repositories from a specified GitHub user.
+- **Git Clean All**: Run `gclean` to delete all cloned git repositories in all folders and subfolders.
+- **Set Nvim Raw**: Run `snvim` to install Neovim without plugins.
+- **Set Nvim Plugins**: Run `snvimp` to install Neovim plugins and advanced configuration.
+- **Set Nvim All**: Run `snvima` to install Neovim and plugins.
+- **Set Code Environment**: Run `senv` to install Neovim, plugins, and pull from all repositories.
 
 ### Example Usage
 
 ```bash
-git-fix-all            # Fixes common issues in your repo
-git-pull-all           # Pulls the latest changes from all branches
-git-push-all           # Pushes your changes to all remote branches
-git-tree               # Displays the commit history in a tree format
-git-info               # Shows available Git utils aliases and descriptions
-git-purge              # Uninstalls all Git utils and removes aliases
-git-clone-all <user>   # Clones all public repositories from a specified GitHub user
-git-delete-all         # Deletes all cloned git repositories in all folders and subfolders
-set-nvim-raw           # Installs Neovim without plugins
-set-nvim-plugins       # Installs Neovim plugins and advanced configuration
-set-nvim-all           # Installs Neovim and plugins
-set-code-env    # Installs Neovim, plugins, and pulls from all repositories
-```
-
-### Mostrar los alias disponibles
-
-```bash
-echo "📌 Git Utils - Available Aliases:"
-echo "                                                                         "
-echo "🔹 git-fix                -> Fixes issues with pull, merge, and rebase."
-echo "🔹 git-pull-all           -> Pulls from all repositories."
-echo "🔹 git-push-all           -> Pushes to all repositories."
-echo "🔹 git-tree               -> Displays the commit history as a tree."
-echo "🔹 git-info               -> Shows this information."
-echo "🔹 git-purge              -> Uninstalls all Git utils and removes aliases."
-echo "🔹 git-clone-all <user>   -> Clones all public repositories from a GitHub user."
-echo "🔹 git-delete-all         -> Deletes all cloned git repositories."
-echo "🔹 set-nvim-raw           -> Installs Neovim without plugins."
-echo "🔹 set-nvim-plugins       -> Installs Neovim plugins and advanced configuration."
-echo "🔹 set-nvim-all           -> Installs Neovim and plugins."
-echo "🔹 set-code-env    -> Installs Neovim, plugins, and pulls from all repositories."
-echo ""
-echo "ℹ️  You can run any alias by simply typing it in the terminal."
-echo "🚀  Happy coding!"
-echo "Contact me at ismhernaismherna@student.42madrid.com"
+gfix                    # Fixes common issues in your repo
+gpull                   # Pulls the latest changes from all branches
+gpush                   # Pushes your changes to all remote branches
+gtree                   # Displays the commit history in a tree format
+ginfo                   # Shows available Git utils aliases and descriptions
+gpurge                  # Uninstalls all Git utils and removes aliases
+gclone <user>           # Clones all public repositories from a specified GitHub user
+gclean                  # Deletes all cloned git repositories in all folders and subfolders
+snvim                   # Installs Neovim without plugins
+snvimp                  # Installs Neovim plugins and advanced configuration
+snvima                  # Installs Neovim and plugins
+senv                    # Installs Neovim, plugins, and pulls from all repositories
 ```

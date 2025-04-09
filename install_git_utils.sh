@@ -35,18 +35,18 @@ echo "🔗 Adding aliases to $SHELL_CONFIG..."
 cat <<EOF >> "$SHELL_CONFIG"
 
 # Git utils aliases
-alias gf='bash $HOME/$FOLDER_NAME/Git_fix_all/pull_merge_rebase_fix.sh'
+alias gfix='bash $HOME/$FOLDER_NAME/Git_fix_all/pull_merge_rebase_fix.sh'
 alias gpurge='bash $HOME/$FOLDER_NAME/git_purge.sh'
-alias gpa='bash $HOME/$FOLDER_NAME/Git_pull_all/pull_all.sh'
-alias gca='bash $HOME/$FOLDER_NAME/Git_clone_all/git_clone_all.sh'
+alias gpull='bash $HOME/$FOLDER_NAME/Git_pull_all/pull_all.sh'
+alias gclone='bash $HOME/$FOLDER_NAME/Git_clone_all/git_clone_all.sh'
 alias gpush='bash $HOME/$FOLDER_NAME/Git_push_all/push_all.sh'
-alias gda='bash $HOME/$FOLDER_NAME/Git_delete_repos/git_delete_repos.sh'
+alias gclean='bash $HOME/$FOLDER_NAME/Git_delete_repos/git_delete_repos.sh'
 alias gtree='bash $HOME/$FOLDER_NAME/Git_tree/git_tree.sh'
 alias ginfo='bash $HOME/$FOLDER_NAME/Git_info/git_info.sh'
 alias snvim='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh'
 alias snvimp='bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
 alias snvima='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh && bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
-alias set-code-env='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh && bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
+alias senv='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh && bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
 EOF
 
 
@@ -64,9 +64,9 @@ fi
 echo "🔧 Granting execution permissions to $PURGE_SCRIPT..."
 chmod +x "$PURGE_SCRIPT"
 
-# Add git-purge alias
-echo "🔗 Adding git-purge alias to $SHELL_CONFIG..."
-echo "alias git-purge='bash $PURGE_SCRIPT'" >> "$SHELL_CONFIG"
+# Add gpurge alias
+echo "🔗 Adding gpurge alias to $SHELL_CONFIG..."
+echo "alias gpurge='bash $PURGE_SCRIPT'" >> "$SHELL_CONFIG"
 
 # Apply changes immediately
 echo "🔄 Applying changes to the shell configuration..."

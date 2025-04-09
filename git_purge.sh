@@ -11,19 +11,19 @@ fi
 
 # Remove specific aliases related to git_env_tools
 echo "🧹 Removing specific aliases from $SHELL_CONFIG..."
-sed -i '/alias gf=/d' "$SHELL_CONFIG"
+sed -i '/alias gfix=/d' "$SHELL_CONFIG"
 sed -i '/alias gpurge=/d' "$SHELL_CONFIG"
-sed -i '/alias gpa=/d' "$SHELL_CONFIG"
-sed -i '/alias gca=/d' "$SHELL_CONFIG"
+sed -i '/alias gpull=/d' "$SHELL_CONFIG"
+sed -i '/alias gclone=/d' "$SHELL_CONFIG"
 sed -i '/alias gpush=/d' "$SHELL_CONFIG"
-sed -i '/alias gda=/d' "$SHELL_CONFIG"
+sed -i '/alias gclean=/d' "$SHELL_CONFIG"
 sed -i '/alias gtree=/d' "$SHELL_CONFIG"
 sed -i '/alias ginfo=/d' "$SHELL_CONFIG"
 sed -i '/alias snvim=/d' "$SHELL_CONFIG"
 sed -i '/alias snvimp=/d' "$SHELL_CONFIG"
 sed -i '/alias snvima=/d' "$SHELL_CONFIG"
-sed -i '/alias set-code-env=/d' "$SHELL_CONFIG"
-sed -i '/alias git-purge=/d' "$SHELL_CONFIG"
+sed -i '/alias senv=/d' "$SHELL_CONFIG"
+sed -i '/alias gpurge=/d' "$SHELL_CONFIG"
 
 # Remove execution permissions from git_env_tools scripts
 echo "🔧 Removing execution permissions from git_env_tools scripts..."
