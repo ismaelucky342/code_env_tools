@@ -9,9 +9,21 @@ else
     SHELL_CONFIG="$HOME/.bashrc"
 fi
 
-# Remove aliases related to git_env_tools
-echo "🧹 Removing g aliases from $SHELL_CONFIG..."
-sed -i '/^alias g/d' "$SHELL_CONFIG"
+# Remove specific aliases related to git_env_tools
+echo "🧹 Removing specific aliases from $SHELL_CONFIG..."
+sed -i '/alias gf=/d' "$SHELL_CONFIG"
+sed -i '/alias gpurge=/d' "$SHELL_CONFIG"
+sed -i '/alias gpa=/d' "$SHELL_CONFIG"
+sed -i '/alias gca=/d' "$SHELL_CONFIG"
+sed -i '/alias gpush=/d' "$SHELL_CONFIG"
+sed -i '/alias gda=/d' "$SHELL_CONFIG"
+sed -i '/alias gtree=/d' "$SHELL_CONFIG"
+sed -i '/alias ginfo=/d' "$SHELL_CONFIG"
+sed -i '/alias snvim=/d' "$SHELL_CONFIG"
+sed -i '/alias snvimp=/d' "$SHELL_CONFIG"
+sed -i '/alias snvima=/d' "$SHELL_CONFIG"
+sed -i '/alias set-code-env=/d' "$SHELL_CONFIG"
+sed -i '/alias git-purge=/d' "$SHELL_CONFIG"
 
 # Remove execution permissions from git_env_tools scripts
 echo "🔧 Removing execution permissions from git_env_tools scripts..."
@@ -24,10 +36,6 @@ rm -rf "$HOME/git_env_tools"
 # Remove Neovim binaries, configs, and data
 echo "🗑️ Removing Neovim and its configuration..."
 rm -rf "$HOME/.config/nvim" "$HOME/.local/share/nvim" "$HOME/.local/bin/nvim"
-
-# Remove any Neovim references in shell configuration
-echo "🧹 Cleaning up s related shell configuration..."
-sed -i '/s/d' "$SHELL_CONFIG"
 
 # Reload shell configuration
 echo "🔄 Reloading shell configuration..."
