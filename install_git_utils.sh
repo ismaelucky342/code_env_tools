@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Repository URL and destination folder
-REPO_URL="https://github.com/ismaelucky342/git_env_tools.git"
-FOLDER_NAME="git_env_tools"
+REPO_URL="https://github.com/ismaelucky342/code_env_tools.git"
+FOLDER_NAME="code_env_tools"
 
 # Detect the shell configuration file dynamically
 if [[ "$SHELL" == */zsh ]]; then
@@ -24,6 +24,7 @@ fi
 echo "🔧 Granting execution permissions to the scripts..."
 cd "$FOLDER_NAME" || exit 1  # Ensure we are in the correct folder
 chmod +x Git_*/*.sh
+chmod +x Nvim_*/*.sh
 cd ..
 
 # Remove old aliases from the shell configuration

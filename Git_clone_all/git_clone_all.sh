@@ -3,12 +3,12 @@
 print_usage() {
     echo "📘 USAGE:"
     echo "  gclone <user> <all>         Clones all public repositories of the user"
-    echo "  gclone <user> <keyword>     Clones repositories containing the keyword in their name"
+    echo "  gclone <user> <keyword>     Searches repositories matching keyword, then lets you choose"
     echo "  gclone <info>               Displays this information"
 }
 
-# If no arguments are provided or help is requested
-if [ $# -eq 0 ] || [ "$1" == "info" ] || [ "$1" == "--help" ]; then
+# Show help if needed
+if [ $# -eq 0 ] || [[ "$1" == "info" ]] || [[ "$1" == "--help" ]]; then
     print_usage
     exit 0
 fi
@@ -22,16 +22,14 @@ if [ -z "$USER_GITHUB" ] || [ -z "$KEYWORD" ]; then
     exit 1
 fi
 
-# Create destination folder
 DEST_FOLDER="$HOME/${USER_GITHUB}-repos"
 mkdir -p "$DEST_FOLDER"
 cd "$DEST_FOLDER" || exit 1
 
 echo "🚀 Fetching repository list for $USER_GITHUB..."
-# Fetch full JSON of repositories
 REPOS_JSON=$(curl -s "https://api.github.com/users/$USER_GITHUB/repos?per_page=100")
 
-# Extract name and HTTPS URL of each repository
+# Extract names and clone URLs
 NAMES=($(echo "$REPOS_JSON" | grep -oP '"name": "\K[^"]+'))
 URLS=($(echo "$REPOS_JSON" | grep -oP '"clone_url": "\K[^"]+'))
 
@@ -40,22 +38,48 @@ if [ ${#NAMES[@]} -eq 0 ]; then
     exit 1
 fi
 
-echo "📦 Repositories found: ${#NAMES[@]}"
+# If keyword is "all", clone everything
+if [ "$KEYWORD" == "all" ]; then
+    echo "📥 Cloning all ${#NAMES[@]} repositories..."
+    for URL in "${URLS[@]}"; do
+        git clone "$URL"
+    done
+    echo "✅ All repositories cloned into $DEST_FOLDER."
+    exit 0
+fi
 
-MATCHED=0
-
+# Search for keyword in repo names
+MATCHED_NAMES=()
+MATCHED_URLS=()
 for i in "${!NAMES[@]}"; do
-    REPO_NAME="${NAMES[$i]}"
-    REPO_URL="${URLS[$i]}"
-    if [ "$KEYWORD" == "all" ] || [[ "$REPO_NAME" == *"$KEYWORD"* ]]; then
-        echo "📥 Cloning $REPO_NAME..."
-        git clone "$REPO_URL"
-        ((MATCHED++))
+    if [[ "${NAMES[$i],,}" == *"${KEYWORD,,}"* ]]; then
+        MATCHED_NAMES+=("${NAMES[$i]}")
+        MATCHED_URLS+=("${URLS[$i]}")
     fi
 done
 
-if [ "$MATCHED" -eq 0 ]; then
+if [ ${#MATCHED_NAMES[@]} -eq 0 ]; then
     echo "🔍 No repositories found matching '$KEYWORD'."
-else
-    echo "✅ $MATCHED repositories cloned into $DEST_FOLDER."
+    exit 1
 fi
+
+# Show matched repos to user
+echo "🔎 Repositories matching '$KEYWORD':"
+for i in "${!MATCHED_NAMES[@]}"; do
+    printf "  [%d] %s\n" "$i" "${MATCHED_NAMES[$i]}"
+done
+
+# Ask user which ones to clone
+echo -n "👉 Enter the numbers of the repositories to clone (separated by spaces): "
+read -r choices
+
+for choice in $choices; do
+    if [[ "$choice" =~ ^[0-9]+$ ]] && [ "$choice" -ge 0 ] && [ "$choice" -lt "${#MATCHED_NAMES[@]}" ]; then
+        echo "📥 Cloning ${MATCHED_NAMES[$choice]}..."
+        git clone "${MATCHED_URLS[$choice]}"
+    else
+        echo "⚠️ Invalid choice: $choice"
+    fi
+done
+
+echo "✅ Cloning completed. Repositories cloned into $DEST_FOLDER."
