@@ -1,42 +1,41 @@
 #!/bin/bash
 
-echo "🚀 Instalando configuración personalizada de Neovim..."
-
-# Directorios
+echo "🚀 Installing custom Neovim configuration..."
+# Directories
 NVIM_CONFIG="$HOME/.config/nvim"
 NVIM_DATA="$HOME/.local/share/nvim"
 
-# Crear estructura
+# Create structure
 mkdir -p "$NVIM_CONFIG"
 mkdir -p "$NVIM_DATA/lazy"
 
-# Instalar Lazy.nvim
+# Install Lazy.nvim
 if [ ! -d "$NVIM_DATA/lazy/lazy.nvim" ]; then
-    echo "📥 Clonando Lazy.nvim..."
+    echo "📥 Cloning Lazy.nvim..."
     git clone --filter=blob:none https://github.com/folke/lazy.nvim.git --branch=stable "$NVIM_DATA/lazy/lazy.nvim"
 fi
 
-# Crear archivo init.lua
+# Create init.lua file
 cat > "$NVIM_CONFIG/init.lua" << 'EOF'
--- Cargar Lazy.nvim
+-- Load Lazy.nvim
 vim.opt.rtp:prepend(vim.fn.stdpath("data") .. "/lazy/lazy.nvim")
 
 -- Plugins
 require("lazy").setup({
-    -- 🎨 Tema tokyonight
+    -- 🎨 Tokyonight theme
     { "folke/tokyonight.nvim", lazy = false, priority = 1000, config = function()
         vim.cmd("colorscheme tokyonight")
     end },
 
-    -- 📌 Gestor de plugins
+    -- 📌 Plugin manager
     { "folke/lazy.nvim" },
 
-    -- 🚀 LSP + Mason (Instalador)
+    -- 🚀 LSP + Mason (Installer)
     { "neovim/nvim-lspconfig" },
     { "williamboman/mason.nvim", build = ":MasonUpdate" },
     { "williamboman/mason-lspconfig.nvim" },
 
-    -- 🤖 Autocompletado
+    -- 🤖 Autocompletion
     { "hrsh7th/nvim-cmp", dependencies = {
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
@@ -46,38 +45,49 @@ require("lazy").setup({
     -- GitHub Copilot
     { "github/copilot.vim" },
 
-    -- 🔎 Navegación
+    -- 🔎 Navigation
     { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
 
-    -- 📁 Árbol de archivos
+    -- 📁 File tree
     { "nvim-tree/nvim-tree.lua", dependencies = { "nvim-tree/nvim-web-devicons" }, config = function()
-        require("nvim-tree").setup()
-        vim.keymap.set("n", "<C-t>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+        -- Configuración de NvimTree
+            require("nvim-tree").setup({
+                -- Configuración opcional
+                view = {
+                    width = 30,  -- Ajustar el ancho del árbol
+                    side = "left",  -- Ubicación del árbol (izquierda/derecha)
+                    number = false,  -- No mostrar números de línea en el árbol
+                    relativenumber = false,  -- No mostrar números relativos en el árbol
+                },
+                filters = {
+                    dotfiles = true,  -- Mostrar archivos ocultos
+                },
+                renderer = {
+                    icons = {
+                        show = {
+                            git = true,  -- Mostrar íconos de git
+                            folder = true,  -- Mostrar íconos de carpetas
+                            file = true,  -- Mostrar íconos de archivos
+                        },
+                    },
+                },
+            })
+        vim.keymap.set("n", "<C-t>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })  -- Shortcut to open/close
     end },
 
-    -- 🧭 Línea de estado
+    -- 🧭 Status line
     { "nvim-lualine/lualine.nvim", config = function()
         require("lualine").setup()
     end },
 })
 
--- Configuración básica de LSP con Mason
-require("mason").setup()
-require("mason-lspconfig").setup({
-    ensure_installed = {
-        "clangd",     -- C/C++
-        "jdtls",      -- Java
-        "pyright",    -- Python
-    },
-})
-
--- Configurar LSP por lenguaje
+-- Configure LSP per language
 local lspconfig = require("lspconfig")
 lspconfig.clangd.setup({})
 lspconfig.jdtls.setup({})
 lspconfig.pyright.setup({})
 
--- Configuración básica de autocompletado
+-- Basic autocompletion configuration
 local cmp = require("cmp")
 cmp.setup({
     mapping = cmp.mapping.preset.insert({
@@ -91,13 +101,13 @@ cmp.setup({
     }),
 })
 
--- Keybindings útiles
+-- Useful keybindings
 vim.api.nvim_set_keymap("n", "<C-p>", ":Telescope find_files<CR>", { noremap = true, silent = true })
 
--- Configuración general
+-- General configuration
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.termguicolors = true
 EOF
 
-echo "✅ ¡Listo! Abre Neovim y ejecuta ':Lazy sync'"
+echo "✅ Done! Open Neovim and run ':Lazy sync'"
