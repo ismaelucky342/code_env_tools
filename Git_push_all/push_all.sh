@@ -7,46 +7,59 @@ CYAN="\e[36m"
 RED="\e[31m"
 RESET="\e[0m"
 
-# Store the current working directory
+# Get current working directory
 start_dir=$(pwd)
 
-# Get the current date and time for the commit message
+# Get timestamp for default commit message
 timestamp=$(date +"%d-%m-%Y %H:%M:%S")
 
-echo -e "${CYAN}🔄 Updating and pushing all repositories...${RESET}"
+# Determine commit message (first argument, if not empty and not a folder)
+if [[ -n "$1" && ! -d "$1" ]]; then
+  commit_msg="$1"
+  shift  # Remove the message from the argument list
+else
+  commit_msg="Commit: $timestamp"
+fi
 
-# Find all subdirectories that contain a .git folder (indicating a Git repo)
-find "$start_dir" -type d -name ".git" | while read gitdir; do
-  repo_dir=$(dirname "$gitdir")  # Get the parent directory (actual repo)
+# Determine which folders to process
+if [ $# -eq 0 ]; then
+  echo -e "${CYAN}🔍 Buscando todos los repositorios...${RESET}"
+  repo_paths=$(find "$start_dir" -type d -name ".git" | xargs -n1 dirname)
+else
+  repo_paths=("$@")
+fi
 
-  # Skip the git_env_tools directory
-  if [[ "$repo_dir" == *"git_env_tools"* ]]; then
-    echo -e "${YELLOW}⚠️ Skipping repository: ${repo_dir}${RESET}"
+echo -e "${CYAN}🔄 Procesando repositorios...${RESET}"
+
+for repo_dir in "${repo_paths[@]}"; do
+  if [[ ! -d "$repo_dir/.git" ]]; then
+    echo -e "${RED}❌ No es un repositorio git: $repo_dir${RESET}"
     continue
   fi
 
-  echo -e "${YELLOW}📂 Processing repository: ${repo_dir}${RESET}"
+  if [[ "$repo_dir" == *"git_env_tools"* ]]; then
+    echo -e "${YELLOW}⚠️ Saltando: $repo_dir${RESET}"
+    continue
+  fi
 
-  cd "$repo_dir" || exit  # Change into the repository directory
+  echo -e "${YELLOW}📂 Procesando: $repo_dir${RESET}"
+  cd "$repo_dir" || continue
 
-  # Add all changes
   git add .
 
-  # Commit changes with timestamp
-  if git commit -m "Commit: $timestamp"; then
-    echo -e "${GREEN}✅ Committed successfully!${RESET}"
+  if git commit -m "$commit_msg"; then
+    echo -e "${GREEN}✅ Commit exitoso!${RESET}"
   else
-    echo -e "${YELLOW}⚠️ Nothing to commit.${RESET}"
+    echo -e "${YELLOW}⚠️ Nada que commitear.${RESET}"
   fi
 
-  # Push to remote repository
   if git push; then
-    echo -e "${GREEN}🚀 Pushed successfully!${RESET}"
+    echo -e "${GREEN}🚀 Push exitoso!${RESET}"
   else
-    echo -e "${RED}❌ Push failed!${RESET}"
+    echo -e "${RED}❌ Fallo al hacer push!${RESET}"
   fi
 
-  cd - > /dev/null || exit  # Return to the starting directory (suppress output)
+  cd - > /dev/null || exit
 done
 
-echo -e "${GREEN}🎉 All repositories are up to date!${RESET}"
+echo -e "${GREEN}🎉 Todos los repositorios están actualizados.${RESET}"
