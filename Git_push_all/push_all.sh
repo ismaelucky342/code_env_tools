@@ -22,12 +22,23 @@ else
 fi
 
 # Determine which folders to process
+repo_paths=()
+
 if [ $# -eq 0 ]; then
   echo -e "${CYAN}🔍 Buscando todos los repositorios...${RESET}"
-  repo_paths=$(find "$start_dir" -type d -name ".git" | xargs -n1 dirname)
+  mapfile -t repo_paths < <(find "$start_dir" -type d -name ".git" | xargs -n1 dirname)
 else
-  repo_paths=("$@")
+  echo -e "${CYAN}🔍 Buscando repositorios en carpetas específicas...${RESET}"
+  for path in "$@"; do
+    if [ -d "$path" ]; then
+      mapfile -t found < <(find "$path" -type d -name ".git" | xargs -n1 dirname)
+      repo_paths+=("${found[@]}")
+    else
+      echo -e "${RED}⚠️ Carpeta no encontrada: $path${RESET}"
+    fi
+  done
 fi
+
 
 echo -e "${CYAN}🔄 Procesando repositorios...${RESET}"
 
