@@ -37,7 +37,7 @@ cat <<EOF >> "$SHELL_CONFIG"
 
 # Git utils aliases
 alias gfix='bash $HOME/$FOLDER_NAME/Git_fix_all/pull_merge_rebase_fix.sh'
-alias gupdate='bash $HOME/$FOLDER_NAME/Git_update/git_update.sh'
+alias gupdate='bash -c "$(curl -fsSL https://raw.githubusercontent.com/ismaelucky342/git_env_tools/main/install_git_utils.sh)"'
 alias gpurge='bash $HOME/$FOLDER_NAME/git_purge.sh'
 alias gpull='bash $HOME/$FOLDER_NAME/Git_pull_all/pull_all.sh'
 alias gclone='bash $HOME/$FOLDER_NAME/Git_clone_all/git_clone_all.sh'

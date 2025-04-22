@@ -25,52 +25,51 @@ fi
 repo_paths=()
 
 if [ $# -eq 0 ]; then
-  echo -e "${CYAN}🔍 Buscando todos los repositorios...${RESET}"
+  echo -e "${CYAN}🔍 Searching for all repositories...${RESET}"
   mapfile -t repo_paths < <(find "$start_dir" -type d -name ".git" | xargs -n1 dirname)
 else
-  echo -e "${CYAN}🔍 Buscando repositorios en carpetas específicas...${RESET}"
+  echo -e "${CYAN}🔍 Searching for repositories in specific folders...${RESET}"
   for path in "$@"; do
     if [ -d "$path" ]; then
       mapfile -t found < <(find "$path" -type d -name ".git" | xargs -n1 dirname)
       repo_paths+=("${found[@]}")
     else
-      echo -e "${RED}⚠️ Carpeta no encontrada: $path${RESET}"
+      echo -e "${RED}⚠️ Folder not found: $path${RESET}"
     fi
   done
 fi
 
-
-echo -e "${CYAN}🔄 Procesando repositorios...${RESET}"
+echo -e "${CYAN}🔄 Processing repositories...${RESET}"
 
 for repo_dir in "${repo_paths[@]}"; do
   if [[ ! -d "$repo_dir/.git" ]]; then
-    echo -e "${RED}❌ No es un repositorio git: $repo_dir${RESET}"
+    echo -e "${RED}❌ Not a git repository: $repo_dir${RESET}"
     continue
   fi
 
   if [[ "$repo_dir" == *"git_env_tools"* ]]; then
-    echo -e "${YELLOW}⚠️ Saltando: $repo_dir${RESET}"
+    echo -e "${YELLOW}⚠️ Skipping: $repo_dir${RESET}"
     continue
   fi
 
-  echo -e "${YELLOW}📂 Procesando: $repo_dir${RESET}"
+  echo -e "${YELLOW}📂 Processing: $repo_dir${RESET}"
   cd "$repo_dir" || continue
 
   git add .
 
   if git commit -m "$commit_msg"; then
-    echo -e "${GREEN}✅ Commit exitoso!${RESET}"
+    echo -e "${GREEN}✅ Commit successful!${RESET}"
   else
-    echo -e "${YELLOW}⚠️ Nada que commitear.${RESET}"
+    echo -e "${YELLOW}⚠️ Nothing to commit.${RESET}"
   fi
 
   if git push; then
-    echo -e "${GREEN}🚀 Push exitoso!${RESET}"
+    echo -e "${GREEN}🚀 Push successful!${RESET}"
   else
-    echo -e "${RED}❌ Fallo al hacer push!${RESET}"
+    echo -e "${RED}❌ Push failed!${RESET}"
   fi
 
   cd - > /dev/null || exit
 done
 
-echo -e "${GREEN}🎉 Todos los repositorios están actualizados.${RESET}"
+echo -e "${GREEN}🎉 All repositories are up to date.${RESET}"
