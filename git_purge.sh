@@ -23,7 +23,8 @@ sed -i '/alias snvim=/d' "$SHELL_CONFIG"
 sed -i '/alias snvimp=/d' "$SHELL_CONFIG"
 sed -i '/alias snvima=/d' "$SHELL_CONFIG"
 sed -i '/alias senv=/d' "$SHELL_CONFIG"
-sed -i '/alias gupdate=/d' "$SHELL_CONFIG"
+sed -i '/alias gupdate=/,/}; f/d' "$SHELL_CONFIG"
+
 # Remove execution permissions from git_env_tools scripts
 echo "🔧 Removing execution permissions from git_env_tools scripts..."
 chmod -x "$HOME/git_env_tools"/g*/*.sh 2>/dev/null
