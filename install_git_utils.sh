@@ -69,8 +69,6 @@ alias gupdate='f() {
 
 EOF
 
-
-
 # Find the git_purge.sh script dynamically
 PURGE_SCRIPT=$(find "$HOME/$FOLDER_NAME/" -type f -name "git_purge.sh" | head -n 1)
 
@@ -80,7 +78,6 @@ if [ -z "$PURGE_SCRIPT" ]; then
     exit 1
 fi
 
-# Ensure the purge script is executable
 echo "🔧 Granting execution permissions to $PURGE_SCRIPT..."
 chmod +x "$PURGE_SCRIPT"
 
