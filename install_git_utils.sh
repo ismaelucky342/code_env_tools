@@ -34,10 +34,8 @@ sed -i '/# Git utils aliases/,+5d' "$SHELL_CONFIG"
 # Add new aliases
 echo "🔗 Adding aliases to $SHELL_CONFIG..."
 cat <<EOF >> "$SHELL_CONFIG"
-
 # Git utils aliases
 alias gfix='bash $HOME/$FOLDER_NAME/Git_fix_all/pull_merge_rebase_fix.sh'
-alias gupdate='bash -c "$(curl -fsSL https://raw.githubusercontent.com/ismaelucky342/git_env_tools/main/install_git_utils.sh)"'
 alias gpurge='bash $HOME/$FOLDER_NAME/git_purge.sh'
 alias gpull='bash $HOME/$FOLDER_NAME/Git_pull_all/pull_all.sh'
 alias gclone='bash $HOME/$FOLDER_NAME/Git_clone_all/git_clone_all.sh'
@@ -49,6 +47,26 @@ alias snvim='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh'
 alias snvimp='bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
 alias snvima='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh && bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
 alias senv='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh && bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
+alias gupdate='f() {
+  cd "$HOME/$FOLDER_NAME" || return 1
+  git fetch
+  LOCAL=$(git rev-parse @)
+  REMOTE=$(git rev-parse @{u})
+  BASE=$(git merge-base @ @{u})
+
+  if [ "$LOCAL" = "$REMOTE" ]; then
+    echo "🔄 Already up to date."
+  elif [ "$LOCAL" = "$BASE" ]; then
+    echo "⬇️  Changes found on remote. Pulling..."
+    git pull
+  elif [ "$REMOTE" = "$BASE" ]; then
+    echo "⬆️  You have local commits that haven’t been pushed."
+  else
+    echo "⚠️  Diverged. Manual intervention needed."
+  fi
+  cd - > /dev/null
+}; f'
+
 EOF
 
 
