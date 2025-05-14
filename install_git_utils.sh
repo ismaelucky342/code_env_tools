@@ -4,6 +4,7 @@
 REPO_URL="https://github.com/ismaelucky342/code_env_tools.git"
 FOLDER_NAME="code_env_tools"
 
+
 # Detect the shell configuration file dynamically
 if [[ "$SHELL" == */zsh ]]; then
     SHELL_CONFIG="$HOME/.zshrc"
@@ -19,6 +20,7 @@ else
     echo "⚡ The repository already exists. Updating..."
     cd "$FOLDER_NAME" && git pull && cd ..
 fi
+
 
 # Grant execution permissions to all scripts
 echo "🔧 Granting execution permissions to the scripts..."
