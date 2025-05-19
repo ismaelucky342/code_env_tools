@@ -1,0 +1,25 @@
+FROM debian:bookworm-slim
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y curl git unzip build-essential libtool-bin locales jq && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN locale-gen en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
+
+RUN curl -s https://api.github.com/repos/neovim/neovim/releases/latest \
+    | jq -r '.assets[] | select(.name | test("linux.*tar.gz")) | .browser_download_url' \
+    | head -n 1 \
+    | xargs curl -fLo nvim.tar.gz && \
+    tar xzf nvim.tar.gz && \
+    mv nvim-* /opt/nvim && \
+    ln -s /opt/nvim/bin/nvim /usr/local/bin/nvim && \
+    rm nvim.tar.gz
+
+COPY nvim_config/ /root/.config/nvim
+
+CMD ["nvim"]
