@@ -4,6 +4,7 @@
 echo "📌 Git Utils - Available Aliases:"
 echo "                                                                         "
 echo "🔹 gfix                           -> Fixes issues with pull, merge, and rebase."
+echo "🔹 gsub                           -> Initializes and updates Git submodules."
 echo "🔹 gpull                          -> Pulls from all repositories."
 echo "🔹 gpush                          -> Pushes to all repositories."
 echo "🔹 gtree                          -> Displays the commit history as a tree."

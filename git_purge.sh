@@ -12,6 +12,7 @@ fi
 # Remove specific aliases related to git_env_tools
 echo "🧹 Removing specific aliases from $SHELL_CONFIG..."
 sed -i '/alias gfix=/d' "$SHELL_CONFIG"
+sed -i '/alias gsub=/d' "$SHELL_CONFIG"
 sed -i '/alias gpurge=/d' "$SHELL_CONFIG"
 sed -i '/alias gpull=/d' "$SHELL_CONFIG"
 sed -i '/alias gclone=/d' "$SHELL_CONFIG"
