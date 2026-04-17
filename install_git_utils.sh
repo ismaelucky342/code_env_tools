@@ -36,6 +36,18 @@ sed -i '/# Git utils aliases/,+5d' "$SHELL_CONFIG"
 # Add new aliases
 echo "🔗 Adding aliases to $SHELL_CONFIG..."
 cat <<EOF >> "$SHELL_CONFIG"
+# Workspace utils aliases
+alias pyenv='bash $HOME/$FOLDER_NAME/Workspace_utils/pyenv.sh'
+alias nenv='bash $HOME/$FOLDER_NAME/Workspace_utils/nenv.sh'
+alias dockup='bash $HOME/$FOLDER_NAME/Workspace_utils/dockup.sh'
+alias ports='bash $HOME/$FOLDER_NAME/Workspace_utils/ports.sh'
+alias kport='bash $HOME/$FOLDER_NAME/Workspace_utils/kport.sh'
+alias openp='bash $HOME/$FOLDER_NAME/Workspace_utils/openp.sh'
+alias lint='bash $HOME/$FOLDER_NAME/Workspace_utils/lint.sh'
+alias bigf='bash $HOME/$FOLDER_NAME/Workspace_utils/bigf.sh'
+alias bkup='bash $HOME/$FOLDER_NAME/Workspace_utils/bkup.sh'
+
+# Git utils aliases
 # Git utils aliases
 alias gfix='bash $HOME/$FOLDER_NAME/Git_fix_all/pull_merge_rebase_fix.sh'
 alias gsub='bash $HOME/$FOLDER_NAME/Git_Submodules/submodules.sh'
@@ -46,10 +58,21 @@ alias gpush='bash $HOME/$FOLDER_NAME/Git_push_all/push_all.sh'
 alias gclean='bash $HOME/$FOLDER_NAME/Git_delete_repos/git_delete_repos.sh'
 alias gtree='bash $HOME/$FOLDER_NAME/Git_tree/git_tree.sh'
 alias ginfo='bash $HOME/$FOLDER_NAME/Git_info/git_info.sh'
+alias gcheck='bash $HOME/$FOLDER_NAME/Git_utils/gcheck.sh'
+alias gsta='bash $HOME/$FOLDER_NAME/Git_utils/gsta.sh'
+alias gbrc='bash $HOME/$FOLDER_NAME/Git_utils/gbrc.sh'
+alias gstsh='bash $HOME/$FOLDER_NAME/Git_utils/gstsh.sh'
+alias glogf='bash $HOME/$FOLDER_NAME/Git_utils/glogf.sh'
+alias gstat='bash $HOME/$FOLDER_NAME/Git_utils/gstat.sh'
+alias gundo='bash $HOME/$FOLDER_NAME/Git_utils/gundo.sh'
+alias gtag='bash $HOME/$FOLDER_NAME/Git_utils/gtag.sh'
+
+# Neovim utils aliases
 alias snvim='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh'
 alias snvimp='bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
 alias snvima='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh && bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
 alias senv='bash $HOME/$FOLDER_NAME/Nvim_set_raw/set_nvim_raw.sh && bash $HOME/$FOLDER_NAME/Nvim_set_plugins/set_nvim_plugins.sh'
+
 alias gupdate='f() {
   cd "$HOME/$FOLDER_NAME" || return 1
   git fetch
@@ -58,14 +81,14 @@ alias gupdate='f() {
   BASE=$(git merge-base @ @{u})
 
   if [ "$LOCAL" = "$REMOTE" ]; then
-    echo "🔄 Already up to date."
+    echo "Already up to date."
   elif [ "$LOCAL" = "$BASE" ]; then
-    echo "⬇️  Changes found on remote. Pulling..."
+    echo "Changes found on remote. Pulling..."
     git pull
   elif [ "$REMOTE" = "$BASE" ]; then
-    echo "⬆️  You have local commits that haven’t been pushed."
+    echo "You have local commits that haven’t been pushed."
   else
-    echo "⚠️  Diverged. Manual intervention needed."
+    echo "Diverged. Manual intervention needed."
   fi
   cd - > /dev/null
 }; f'

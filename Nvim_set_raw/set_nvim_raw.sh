@@ -1,5 +1,18 @@
 #!/bin/bash
 
+# ========================
+# Instalar dependencias esenciales
+# ========================
+echo "🔎 Instalando dependencias esenciales..."
+if command -v apt-get >/dev/null 2>&1; then
+    sudo apt-get update
+    sudo apt-get install -y git curl unzip tar gcc g++ make python3 python3-pip nodejs npm openjdk-17-jdk
+elif command -v pacman >/dev/null 2>&1; then
+    sudo pacman -Sy --noconfirm git curl unzip tar base-devel python python-pip nodejs npm jdk-openjdk
+else
+    echo "⚠️  No se detectó un gestor de paquetes compatible (apt-get o pacman). Instala dependencias manualmente."
+fi
+
 # Definir la URL del Tarball de Neovim
 NVIM_URL="https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz"
 INSTALL_DIR="$HOME/.local/nvim"
